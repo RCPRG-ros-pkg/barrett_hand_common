@@ -163,7 +163,7 @@ class BarrettHandMarkers:
             self.velocity_menu_id_map[velocity] = self.menu_handler.insert( str(velocity), parent=self.menu_velocity, callback=self.velocityCb )
 
         # create an interactive marker server on the topic namespace simple_marker
-        self.server = InteractiveMarkerServer('/'+self.prefix+'_markers')
+        self.server = InteractiveMarkerServer('/int_markers_barretthand_'+self.prefix)
 
         button1Control = self.createSphereMarkerControl(Point(0.03,0.03,0.03), Point(0.1,0.02,-0.18), ColorRGBA(1,0,0,1))
         button1Control.interaction_mode = InteractiveMarkerControl.BUTTON
@@ -246,75 +246,22 @@ class BarrettHandMarkers:
 
     def __init__(self, prefix):
         self.prefix = prefix
-        print "BarrettHandMarkers a"
         self.bh = barrett_hand_interface.BarrettHand(self.prefix)
         self.stop_force = 30
         self.spread_hold = True
         self.velocity = 1.0
         self.update_on = "demand"
-        print "BarrettHandMarkers b"
         self.run_int()
 
-        print "BarrettHandMarkers c"
-
-        self.pub0 = rospy.Publisher('optoforce0_pos', Vector3Stamped, queue_size=10)
-        self.pub1 = rospy.Publisher('optoforce1_pos', Vector3Stamped, queue_size=10)
-        self.pub2 = rospy.Publisher('optoforce2_pos', Vector3Stamped, queue_size=10)
         self.listener = tf.TransformListener()
 
-        print "BarrettHandMarkers d"
-
-    def spin(self):
-        rate = rospy.Rate(10.0)
-
-        rospy.spin()
-        return
-        while not rospy.is_shutdown():
-            rate.sleep()
-            try:
-                (trans0,rot0) = self.listener.lookupTransform('/right_HandPalmLink', '/right_HandFingerOneKnuckleThreeOptoforce', rospy.Time(0))
-                (trans1,rot1) = self.listener.lookupTransform('/right_HandPalmLink', '/right_HandFingerTwoKnuckleThreeOptoforce', rospy.Time(0))
-                (trans2,rot2) = self.listener.lookupTransform('/right_HandPalmLink', '/right_HandFingerThreeKnuckleThreeOptoforce', rospy.Time(0))
-            except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
-                continue
-
-            v0 = Vector3Stamped()
-            v1 = Vector3Stamped()
-            v2 = Vector3Stamped()
-            v0.header.stamp = rospy.Time.now()
-            v1.header.stamp = rospy.Time.now()
-            v2.header.stamp = rospy.Time.now()
-            v0.vector.x = trans0[0]
-            v0.vector.y = trans0[1]
-            v0.vector.z = trans0[2]
-            v1.vector.x = trans1[0]
-            v1.vector.y = trans1[1]
-            v1.vector.z = trans1[2]
-            v2.vector.x = trans2[0]
-            v2.vector.y = trans2[1]
-            v2.vector.z = trans2[2]
-            self.pub0.publish(v0)
-            self.pub1.publish(v1)
-            self.pub2.publish(v2)
-        
-
-
 if __name__ == '__main__':
-    a = []
-    for arg in sys.argv:
-        a.append(arg)
+    rospy.init_node('int_markers_barretthands', anonymous=True)
 
-    if len(a) > 1:
-        prefix = a[1]
-    else:
-        print "Usage: %s prefix"%a[0]
-        exit(0)
-
-    rospy.init_node(prefix+'_hand_markers', anonymous=True)
-
-    bhm = BarrettHandMarkers(prefix)
+    bhr = BarrettHandMarkers("right")
+    bhl = BarrettHandMarkers("left")
 
     # start the ROS main loop
-    bhm.spin()
+    rospy.spin()
 
 
