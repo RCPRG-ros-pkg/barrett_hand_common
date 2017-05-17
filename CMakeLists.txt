@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(barrett_hand_common)
 
-find_package(catkin REQUIRED COMPONENTS rtt_ros cmake_modules kuka_lwr_fri barrett_hand_controller_msgs eigen_conversions)
+find_package(catkin REQUIRED COMPONENTS rtt_ros cmake_modules barrett_hand_controller_msgs eigen_conversions)
 
 find_package(Eigen REQUIRED)
 find_package(Boost COMPONENTS thread REQUIRED)
