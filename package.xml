@@ -1,5 +1,5 @@
 <package>
-  <name>barrett_hand_common</name>
+  <name>barrett_hand_tactile</name>
   <version>0.0.1</version>
   <description>	Simulation plugin and launch scripts for Velma in gazebo.</description>
   <maintainer email="dawid.seredynski@gmail.com">Dawid Seredynski</maintainer>
@@ -11,7 +11,7 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>roscpp</build_depend>
-  <build_depend>barrett_hand_controller_msgs</build_depend>
+  <build_depend>barrett_hand_msgs</build_depend>
   <build_depend>orocos_kdl</build_depend>
   <build_depend>eigen_conversions</build_depend>
   

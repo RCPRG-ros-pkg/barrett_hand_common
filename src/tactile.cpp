@@ -25,8 +25,8 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "barrett_hand_common/tactile.h"
-#include "barrett_hand_common/tactile_geometry.h"
+#include "barrett_hand_tactile/tactile.h"
+#include "barrett_hand_tactile/tactile_geometry.h"
 
 #include <Eigen/Core>
 #include <Eigen/Geometry>

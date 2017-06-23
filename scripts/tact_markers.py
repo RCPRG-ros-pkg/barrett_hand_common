@@ -25,7 +25,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import roslib; roslib.load_manifest('barrett_hand_common')
+import roslib; roslib.load_manifest('barrett_hand_tactile')
 
 import sys
 import rospy
@@ -33,7 +33,7 @@ import math
 
 import std_msgs.msg
 from std_msgs.msg import ColorRGBA
-from barrett_hand_controller_msgs.msg import *
+from barrett_hand_msgs.msg import *
 from visualization_msgs.msg import *
 from geometry_msgs.msg import *
 from sensor_msgs.msg import Image
