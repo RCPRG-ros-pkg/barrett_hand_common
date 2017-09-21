@@ -25,3 +25,13 @@ include_directories(include
 add_library(barrett_hand_tactile src/tactile.cpp)
 target_link_libraries(barrett_hand_tactile ${catkin_LIBRARIES} ${orocos_kdl_LIBRARIES})
 
+install(TARGETS barrett_hand_tactile
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+)
+
